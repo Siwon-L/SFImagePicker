@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '10.0'
+
+target 'SFImagePicker_Example' do
+  pod 'SFImagePicker', :path => '../'
+
+  target 'SFImagePicker_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
