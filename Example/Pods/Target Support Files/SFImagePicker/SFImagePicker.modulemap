@@ -1,0 +1,6 @@
+framework module SFImagePicker {
+  umbrella header "SFImagePicker-umbrella.h"
+
+  export *
+  module * { export * }
+}

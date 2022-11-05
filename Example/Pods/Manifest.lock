@@ -1,0 +1,16 @@
+PODS:
+  - SFImagePicker (0.1.0)
+
+DEPENDENCIES:
+  - SFImagePicker (from `../`)
+
+EXTERNAL SOURCES:
+  SFImagePicker:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  SFImagePicker: d86366f01d6d454030200a7de621e1b72a283945
+
+PODFILE CHECKSUM: 33d8cdb442055af2a2a2b77420404a734b6c4b8b
+
+COCOAPODS: 1.11.3
