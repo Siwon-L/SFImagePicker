@@ -21,22 +21,12 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://github.com/91936941/SFImagePicker'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+  s.homepage         = 'https://github.com/saafaaari/SFImagePicker'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { '91936941' => '111dltldnjs@naver.com' }
-  s.source           = { :git => 'https://github.com/91936941/SFImagePicker.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.author           = { 'saafaaari' => '111dltldnjs@gmail.com' }
+  s.source           = { :git => 'https://github.com/saafaaari/SFImagePicker.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '10.0'
-
   s.source_files = 'SFImagePicker/Classes/**/*'
-  
-  # s.resource_bundles = {
-  #   'SFImagePicker' => ['SFImagePicker/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.frameworks = 'UIKit', 'SnapKit'
 end
