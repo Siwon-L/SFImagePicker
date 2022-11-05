@@ -1,6 +1,6 @@
 # SFImagePicker
 
-[![CI Status](https://img.shields.io/travis/91936941/SFImagePicker.svg?style=flat)](https://travis-ci.org/91936941/SFImagePicker)
+[![CI Status](https://img.shields.io/travis/saafaaari/SFImagePicker.svg?style=flat)](https://travis-ci.org/saafaaari/SFImagePicker)
 [![Version](https://img.shields.io/cocoapods/v/SFImagePicker.svg?style=flat)](https://cocoapods.org/pods/SFImagePicker)
 [![License](https://img.shields.io/cocoapods/l/SFImagePicker.svg?style=flat)](https://cocoapods.org/pods/SFImagePicker)
 [![Platform](https://img.shields.io/cocoapods/p/SFImagePicker.svg?style=flat)](https://cocoapods.org/pods/SFImagePicker)
@@ -22,7 +22,7 @@ pod 'SFImagePicker'
 
 ## Author
 
-91936941, 111dltldnjs@naver.com
+saafaaari, 111dltldnjs@gmail.com
 
 ## License
 
