@@ -28,5 +28,5 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '10.0'
   s.source_files = 'SFImagePicker/Classes/**/*'
-  s.frameworks = 'UIKit', 'SnapKit'
+  s.frameworks = 'UIKit'
 end
