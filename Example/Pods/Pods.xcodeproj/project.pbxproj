@@ -16,6 +16,7 @@
 		9B2F2095291767390057ACFC /* SFImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2F2093291767390057ACFC /* SFImagePicker.swift */; };
 		9B2F2096291767390057ACFC /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 9B2F2094291767390057ACFC /* .gitkeep */; };
 		9B2F2099291767A00057ACFC /* SFImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2F2098291767A00057ACFC /* SFImageManager.swift */; };
+		9B2F209B291770570057ACFC /* SFAssetItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2F209A291770570057ACFC /* SFAssetItem.swift */; };
 		9DC2AE13FB690EDAEA79B76740E1B4DE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAB6F611E86A4758835A715E4B4184F6 /* Foundation.framework */; };
 		AEFC7FC103A9E48A1C0A694A462AC5A1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAB6F611E86A4758835A715E4B4184F6 /* Foundation.framework */; };
 		BF59878114113A97718470C132C76A7C /* Pods-SFImagePicker_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 21B67220352037E52D227CD3DB1EF75C /* Pods-SFImagePicker_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -63,6 +64,7 @@
 		9B2F2093291767390057ACFC /* SFImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SFImagePicker.swift; sourceTree = "<group>"; };
 		9B2F2094291767390057ACFC /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		9B2F2098291767A00057ACFC /* SFImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFImageManager.swift; sourceTree = "<group>"; };
+		9B2F209A291770570057ACFC /* SFAssetItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFAssetItem.swift; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A5D8250DD23C0CC6565DE125CDEED5D4 /* Pods-SFImagePicker_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SFImagePicker_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		AB2EC35B0B6EDD6C370784EC135E33E9 /* Pods-SFImagePicker_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SFImagePicker_Tests-umbrella.h"; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				9B2F2098291767A00057ACFC /* SFImageManager.swift */,
+				9B2F209A291770570057ACFC /* SFAssetItem.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -415,6 +418,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B2F2095291767390057ACFC /* SFImagePicker.swift in Sources */,
+				9B2F209B291770570057ACFC /* SFAssetItem.swift in Sources */,
 				FACD3CDEBF41D43D2055E16D5675EB37 /* SFImagePicker.swift in Sources */,
 				9B2F2099291767A00057ACFC /* SFImageManager.swift in Sources */,
 				0B8736D253A280396ED1EC659CB27E46 /* SFImagePicker-dummy.m in Sources */,
