@@ -12,7 +12,7 @@ public final class SFImageManager {
   private let asset: PHAsset
   public let assetID: UUID
   private let manager: PHCachingImageManager
-  private let fatchOptions: PHImageRequestOptions?
+  private let fetchOptions: PHImageRequestOptions?
   
   init(
     asset: PHAsset,
@@ -22,7 +22,7 @@ public final class SFImageManager {
       self.asset = asset
       self.assetID = assetID
       self.manager = manager
-      self.fatchOptions = fatchOptions
+      self.fetchOptions = fatchOptions
     }
   
   public func request(
@@ -33,7 +33,7 @@ public final class SFImageManager {
       for: asset,
       targetSize: size,
       contentMode: .aspectFill,
-      options: fatchOptions
+      options: fetchOptions
     ) { [weak self] image, _ in
       completion(image, self?.assetID)
     }
