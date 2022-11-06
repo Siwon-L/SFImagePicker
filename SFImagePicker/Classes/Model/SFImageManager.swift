@@ -10,7 +10,7 @@ import UIKit
 
 public final class SFImageManager {
   private let asset: PHAsset
-  private let assetID: UUID
+  public let assetID: UUID
   private let manager: PHCachingImageManager
   private let fatchOptions: PHImageRequestOptions?
   
