@@ -11,12 +11,12 @@ import UIKit
 public final class SFImageManager {
   private let asset: PHAsset
   private let manager: PHCachingImageManager
-  private let fatchOptions: PHImageRequestOptions
+  private let fatchOptions: PHImageRequestOptions?
   
   init(
     asset: PHAsset,
     manager: PHCachingImageManager,
-    fatchOptions: PHImageRequestOptions
+    fatchOptions: PHImageRequestOptions?
   ) {
     self.asset = asset
     self.manager = manager
