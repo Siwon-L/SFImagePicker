@@ -66,8 +66,8 @@ final class MSImagePickerView: UIView {
     ])
     
     photoCollectionView.register(
-      MSImageCell.self,
-      forCellWithReuseIdentifier: MSImageCell.identifier
+      SFImageCell.self,
+      forCellWithReuseIdentifier: SFImageCell.identifier
     )
   }
   

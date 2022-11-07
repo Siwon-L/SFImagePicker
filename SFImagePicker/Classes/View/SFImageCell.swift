@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MSImageCell: UICollectionViewCell {
+final class SFImageCell: UICollectionViewCell {
   var representedAssetIdentifier: String!
   
   let imageView: UIImageView = {
