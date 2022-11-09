@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class SFPickerSettings {
+public final class SFPickerSettings {
   public let fetchOptions: SFPickerFetchOptions
   public var ui: SFPickerUI
   public var selection: SFPickerSelection
