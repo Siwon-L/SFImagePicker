@@ -26,7 +26,7 @@ TODO: Add long description of the pod here.
   s.author           = { 'saafaaari' => '111dltldnjs@gmail.com' }
   s.source           = { :git => 'https://github.com/saafaaari/SFImagePicker.git', :tag => s.version.to_s }
 
-  s.ios.deployment_target = '13.0'
+  s.ios.deployment_target = '14.0'
   s.source_files = 'SFImagePicker/Classes/**/*'
   s.frameworks = 'UIKit'
 end

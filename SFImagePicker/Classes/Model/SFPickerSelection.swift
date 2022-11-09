@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SFPickerSelection {
+public struct SFPickerSelection {
   public var max: Int?
   public var min: Int
   

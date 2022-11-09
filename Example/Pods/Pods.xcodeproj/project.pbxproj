@@ -21,10 +21,12 @@
 		9B2F209F29179DCE0057ACFC /* SFPickerSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2F209E29179DCE0057ACFC /* SFPickerSelection.swift */; };
 		9B2F20A129179E660057ACFC /* SFPickerFetchOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2F20A029179E660057ACFC /* SFPickerFetchOptions.swift */; };
 		9B2F20A52917A0C70057ACFC /* SFPickerSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2F20A42917A0C70057ACFC /* SFPickerSettings.swift */; };
-		9B6ECCA72918CC8B007F92D2 /* SFSelectionIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6ECCA62918CC8B007F92D2 /* SFSelectionIndicator.swift */; };
-		9B6ECCA92918D011007F92D2 /* SFImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6ECCA82918D011007F92D2 /* SFImageCell.swift */; };
-		9B6ECCAB2918D311007F92D2 /* SFImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6ECCAA2918D311007F92D2 /* SFImagePickerView.swift */; };
-		9B6ECCAE2918DAB9007F92D2 /* UICollectionViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6ECCAD2918DAB9007F92D2 /* UICollectionViewCell+Extension.swift */; };
+		9B68F071291B994300105A18 /* UICollectionViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6ECCAD2918DAB9007F92D2 /* UICollectionViewCell+Extension.swift */; };
+		9B68F072291B995000105A18 /* SFImagePickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B68F06F291B988D00105A18 /* SFImagePickerDelegate.swift */; };
+		9B68F073291B9A2600105A18 /* SFSelectionIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6ECCA62918CC8B007F92D2 /* SFSelectionIndicator.swift */; };
+		9B68F074291B9A2A00105A18 /* SFImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6ECCA82918D011007F92D2 /* SFImageCell.swift */; };
+		9B68F075291B9A2C00105A18 /* SFImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6ECCAA2918D311007F92D2 /* SFImagePickerView.swift */; };
+		9B68F078291BA50300105A18 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B68F076291BA4C400105A18 /* UIViewController+Extension.swift */; };
 		9DC2AE13FB690EDAEA79B76740E1B4DE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAB6F611E86A4758835A715E4B4184F6 /* Foundation.framework */; };
 		AEFC7FC103A9E48A1C0A694A462AC5A1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAB6F611E86A4758835A715E4B4184F6 /* Foundation.framework */; };
 		BF59878114113A97718470C132C76A7C /* Pods-SFImagePicker_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 21B67220352037E52D227CD3DB1EF75C /* Pods-SFImagePicker_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -77,6 +79,8 @@
 		9B2F209E29179DCE0057ACFC /* SFPickerSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFPickerSelection.swift; sourceTree = "<group>"; };
 		9B2F20A029179E660057ACFC /* SFPickerFetchOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFPickerFetchOptions.swift; sourceTree = "<group>"; };
 		9B2F20A42917A0C70057ACFC /* SFPickerSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFPickerSettings.swift; sourceTree = "<group>"; };
+		9B68F06F291B988D00105A18 /* SFImagePickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFImagePickerDelegate.swift; sourceTree = "<group>"; };
+		9B68F076291BA4C400105A18 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		9B6ECCA62918CC8B007F92D2 /* SFSelectionIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSelectionIndicator.swift; sourceTree = "<group>"; };
 		9B6ECCA82918D011007F92D2 /* SFImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFImageCell.swift; sourceTree = "<group>"; };
 		9B6ECCAA2918D311007F92D2 /* SFImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFImagePickerView.swift; sourceTree = "<group>"; };
@@ -222,6 +226,7 @@
 		9B2F2092291767390057ACFC /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				9B68F06E291B983400105A18 /* Delegates */,
 				9B6ECCAC2918DA98007F92D2 /* Extension */,
 				9B6ECCA52918CC70007F92D2 /* View */,
 				9B2F2097291767490057ACFC /* Model */,
@@ -245,6 +250,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		9B68F06E291B983400105A18 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				9B68F06F291B988D00105A18 /* SFImagePickerDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
 		9B6ECCA52918CC70007F92D2 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -259,6 +272,7 @@
 			isa = PBXGroup;
 			children = (
 				9B6ECCAD2918DAB9007F92D2 /* UICollectionViewCell+Extension.swift */,
+				9B68F076291BA4C400105A18 /* UIViewController+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -447,10 +461,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				605E7E093D1D528DE3CB597618F3D39C /* Pods-SFImagePicker_Example-dummy.m in Sources */,
-				9B6ECCA72918CC8B007F92D2 /* SFSelectionIndicator.swift in Sources */,
-				9B6ECCA92918D011007F92D2 /* SFImageCell.swift in Sources */,
-				9B6ECCAE2918DAB9007F92D2 /* UICollectionViewCell+Extension.swift in Sources */,
-				9B6ECCAB2918D311007F92D2 /* SFImagePickerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,13 +477,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B2F2095291767390057ACFC /* SFImagePicker.swift in Sources */,
+				9B68F072291B995000105A18 /* SFImagePickerDelegate.swift in Sources */,
 				9B2F20A129179E660057ACFC /* SFPickerFetchOptions.swift in Sources */,
+				9B68F078291BA50300105A18 /* UIViewController+Extension.swift in Sources */,
+				9B68F074291B9A2A00105A18 /* SFImageCell.swift in Sources */,
 				9B2F209F29179DCE0057ACFC /* SFPickerSelection.swift in Sources */,
 				9B2F209B291770570057ACFC /* SFAssetItem.swift in Sources */,
 				9B2F20A52917A0C70057ACFC /* SFPickerSettings.swift in Sources */,
 				FACD3CDEBF41D43D2055E16D5675EB37 /* SFImagePicker.swift in Sources */,
 				9B2F2099291767A00057ACFC /* SFImageManager.swift in Sources */,
 				9B2F209D29179D770057ACFC /* SFPickerUI.swift in Sources */,
+				9B68F073291B9A2600105A18 /* SFSelectionIndicator.swift in Sources */,
+				9B68F075291B9A2C00105A18 /* SFImagePickerView.swift in Sources */,
+				9B68F071291B994300105A18 /* UICollectionViewCell+Extension.swift in Sources */,
 				0B8736D253A280396ED1EC659CB27E46 /* SFImagePicker-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -512,7 +528,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/SFImagePicker/SFImagePicker-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/SFImagePicker/SFImagePicker-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/SFImagePicker/SFImagePicker.modulemap";
 				PRODUCT_MODULE_NAME = SFImagePicker;
@@ -641,7 +657,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/SFImagePicker/SFImagePicker-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/SFImagePicker/SFImagePicker-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/SFImagePicker/SFImagePicker.modulemap";
 				PRODUCT_MODULE_NAME = SFImagePicker;

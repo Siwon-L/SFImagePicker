@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SFPickerUI {
+public struct SFPickerUI {
   public var selectedIndicatorColor: UIColor
   
   init(

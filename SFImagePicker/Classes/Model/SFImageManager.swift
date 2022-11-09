@@ -27,15 +27,14 @@ public final class SFImageManager {
   
   public func request(
     size: CGSize,
-    completion: @escaping (UIImage?, UUID?) -> Void
+    completion: @escaping (UIImage?, [AnyHashable : Any]?) -> Void
   ) {
     manager.requestImage(
       for: asset,
       targetSize: size,
       contentMode: .aspectFill,
-      options: fetchOptions
-    ) { [weak self] image, _ in
-      completion(image, self?.assetID)
-    }
+      options: fetchOptions,
+      resultHandler: completion
+    )
   }
 }

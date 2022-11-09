@@ -7,7 +7,7 @@
 
 import Photos
 
-final class SFPickerFetchOptions {
+public final class SFPickerFetchOptions {
   let options = PHImageRequestOptions()
   
   public var isSynchronous: Bool {
@@ -16,6 +16,15 @@ final class SFPickerFetchOptions {
     }
     set {
       options.isSynchronous = newValue
+    }
+  }
+  
+  public var deliveryMode: PHImageRequestOptionsDeliveryMode {
+    get {
+      return options.deliveryMode
+    }
+    set {
+      options.deliveryMode = newValue
     }
   }
 }
