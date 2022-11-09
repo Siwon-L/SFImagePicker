@@ -11,9 +11,9 @@ public extension UIViewController {
   func presentImagePicker(
     _ picker: SFImagePicker,
     animated: Bool,
-    onSelection: ((_ mageManager: SFImageManager) -> Void)?,
-    onDeSelction: ((_ mageManager: SFImageManager) -> Void)?,
-    onFinish: ((_ mageManager: [SFImageManager]) -> Void)?) {
+    onSelection: ((SFImageManager) -> Void)?,
+    onDeSelction: ((SFImageManager) -> Void)?,
+    onFinish: (([SFImageManager]) -> Void)?) {
       picker.onSelection = onSelection
       picker.onDeSelction = onDeSelction
       picker.onFinish = onFinish
