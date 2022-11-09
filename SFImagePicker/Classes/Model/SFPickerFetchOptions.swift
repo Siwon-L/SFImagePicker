@@ -18,4 +18,13 @@ public final class SFPickerFetchOptions {
       options.isSynchronous = newValue
     }
   }
+  
+  public var deliveryMode: PHImageRequestOptionsDeliveryMode {
+    get {
+      return options.deliveryMode
+    }
+    set {
+      options.deliveryMode = newValue
+    }
+  }
 }
