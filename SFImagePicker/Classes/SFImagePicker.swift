@@ -17,7 +17,7 @@ public final class SFImagePicker: UIViewController {
   }
   var onSelection: ((_ imageManager: SFImageManager) -> Void)?
   var onDeSelction: ((_ imageManager: SFImageManager) -> Void)?
-  var onFinish: ((_ imageManager: [SFImageManager]) -> Void)?
+  var onFinish: ((_ imageManagers: [SFImageManager]) -> Void)?
   
   public override func viewDidLoad() {
     super.viewDidLoad()
