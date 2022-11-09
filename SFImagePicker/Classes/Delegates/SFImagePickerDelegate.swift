@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol SFImagePickerDelegate: AnyObject {
+public protocol SFImagePickerDelegate: AnyObject {
   func picker(picker: SFImagePicker, results: [SFImageManager])
 }
 
