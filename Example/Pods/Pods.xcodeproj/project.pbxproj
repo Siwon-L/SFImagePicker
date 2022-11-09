@@ -226,7 +226,6 @@
 		9B2F2092291767390057ACFC /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				9B68F079291BA64E00105A18 /* ImagePicker */,
 				9B68F06E291B983400105A18 /* Delegates */,
 				9B6ECCAC2918DA98007F92D2 /* Extension */,
 				9B6ECCA52918CC70007F92D2 /* View */,
@@ -257,13 +256,6 @@
 				9B68F06F291B988D00105A18 /* SFImagePickerDelegate.swift */,
 			);
 			path = Delegates;
-			sourceTree = "<group>";
-		};
-		9B68F079291BA64E00105A18 /* ImagePicker */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ImagePicker;
 			sourceTree = "<group>";
 		};
 		9B6ECCA52918CC70007F92D2 /* View */ = {
