@@ -15,9 +15,9 @@ public final class SFImagePicker: UIViewController {
       mainView.addButton.isEnabled = selectedItems.count != 0
     }
   }
-  var onSelection: ((_ mageManager: SFImageManager) -> Void)?
-  var onDeSelction: ((_ mageManager: SFImageManager) -> Void)?
-  var onFinish: ((_ mageManager: [SFImageManager]) -> Void)?
+  var onSelection: ((_ imageManager: SFImageManager) -> Void)?
+  var onDeSelction: ((_ imageManager: SFImageManager) -> Void)?
+  var onFinish: ((_ imageManager: [SFImageManager]) -> Void)?
   
   public override func viewDidLoad() {
     super.viewDidLoad()
