@@ -175,7 +175,7 @@ extension SFImagePicker {
   }
 }
 
-// MARK: - UICollectionViewDataSource & UICollectionViewDelegate
+// MARK: - UICollectionViewDataSource
 
 extension SFImagePicker: UICollectionViewDataSource {
   public func collectionView(
@@ -224,7 +224,7 @@ extension SFImagePicker: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegate
 
 extension SFImagePicker: UICollectionViewDelegate {
-  private func collectionView(
+  public func collectionView(
     _ collectionView: UICollectionView,
     didSelectItemAt indexPath: IndexPath
   ) {
