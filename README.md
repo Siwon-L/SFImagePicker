@@ -4,6 +4,7 @@
 [![Version](https://img.shields.io/cocoapods/v/SFImagePicker.svg?style=flat)](https://cocoapods.org/pods/SFImagePicker)
 [![License](https://img.shields.io/cocoapods/l/SFImagePicker.svg?style=flat)](https://cocoapods.org/pods/SFImagePicker)
 [![Platform](https://img.shields.io/cocoapods/p/SFImagePicker.svg?style=flat)](https://cocoapods.org/pods/SFImagePicker)
+[![SwiftPM](https://img.shields.io/badge/SPM-supported-DE5C43.svg?style=flat)](https://swift.org/package-manager/)
 
 ## Example
 
