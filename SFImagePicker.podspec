@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'SFImagePicker'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of SFImagePicker.'
+  s.summary          = 'SFImagePicker is a multi-select imagePicker library that uses photoKit.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
