@@ -12,7 +12,7 @@ public final class SFImagePicker: UIViewController {
   private var selectedItems = [SFAssetItem]() {
     didSet {
       mainView.setSelectionCount(selectedItems.count)
-      mainView.addButton.isEnabled = selectedItems.count != 0
+      mainView.addButton.isEnabled = selectedItems.count >= settings.selection.min
     }
   }
   var onSelection: ((_ imageManager: SFImageManager) -> Void)?

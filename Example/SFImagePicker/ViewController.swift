@@ -22,6 +22,8 @@ class ViewController: UIViewController {
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
+    picker.settings.selection.max = 3
+    picker.settings.selection.min = 2
     presentImagePicker(
       picker,
       animated: true) { imageManager in
