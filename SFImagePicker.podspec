@@ -17,9 +17,7 @@ Pod::Spec.new do |s|
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
-  s.description      = <<-DESC
-TODO: Add long description of the pod here.
-                       DESC
+  s.description      = 'SFImagePicker is a multi-select imagePicker library using photoKit. Get the image via delegate or closure.'
 
   s.homepage         = 'https://github.com/saafaaari/SFImagePicker'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
