@@ -93,7 +93,7 @@ public final class SFImagePicker: UIViewController {
   @objc
   private func cancelButtomDidTap() {
     delegate?.picker(picker: self, results: [])
-    onCancel?([])
+    onCancel?(selectedItems.map { $0.imageManager })
     dismiss(animated: true)
   }
 }
