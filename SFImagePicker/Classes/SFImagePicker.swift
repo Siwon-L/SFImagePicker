@@ -18,6 +18,7 @@ public final class SFImagePicker: UIViewController {
   var onSelection: ((_ imageManager: SFImageManager) -> Void)?
   var onDeSelction: ((_ imageManager: SFImageManager) -> Void)?
   var onFinish: ((_ imageManagers: [SFImageManager]) -> Void)?
+  var onCancel: ((_ imageManagers: [SFImageManager]) -> Void)?
   
   public override func viewDidLoad() {
     super.viewDidLoad()
@@ -92,7 +93,7 @@ public final class SFImagePicker: UIViewController {
   @objc
   private func cancelButtomDidTap() {
     delegate?.picker(picker: self, results: [])
-    onFinish?([])
+    onCancel?([])
     dismiss(animated: true)
   }
 }
