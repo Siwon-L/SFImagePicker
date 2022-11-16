@@ -13,12 +13,14 @@ public extension UIViewController {
     animated: Bool,
     onSelection: ((SFImageManager) -> Void)? = nil,
     onDeSelction: ((SFImageManager) -> Void)? = nil,
-    onFinish: (([SFImageManager]) -> Void)? = nil
+    onFinish: (([SFImageManager]) -> Void)? = nil,
+    onCancel: (([SFImageManager]) -> Void)? = nil
   ) {
-      picker.onSelection = onSelection
-      picker.onDeSelction = onDeSelction
-      picker.onFinish = onFinish
-      
-      self.present(picker, animated: animated)
+    picker.onSelection = onSelection
+    picker.onDeSelction = onDeSelction
+    picker.onFinish = onFinish
+    picker.onCancel = onCancel
+    
+    self.present(picker, animated: animated)
   }
 }
