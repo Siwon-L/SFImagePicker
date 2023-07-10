@@ -6,7 +6,7 @@ public final class SFImagePicker: UIViewController {
   public weak var delegate: SFImagePickerDelegate?
   private var fetchResult: PHFetchResult<PHAsset>?
   private let imageManager: PHCachingImageManager = .init()
-  private let mainView = MSImagePickerView()
+  private let mainView = SFImagePickerView()
   public let settings = SFPickerSettings()
   
   private var selectedItems = [SFAssetItem]() {
@@ -39,7 +39,6 @@ public final class SFImagePicker: UIViewController {
   
   private func permissionCheck() {
     let photoAuthorizationStatus = PHPhotoLibrary.authorizationStatus(for: .readWrite)
-    
     switch photoAuthorizationStatus {
     case .notDetermined:
       PHPhotoLibrary.requestAuthorization(

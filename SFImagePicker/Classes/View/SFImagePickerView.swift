@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MSImagePickerView: UIView {
+final class SFImagePickerView: UIView {
   let navigationBar = UINavigationBar()
   let navigationitem = UINavigationItem(title: "사진첩")
   let addButton: UIBarButtonItem = {
