@@ -28,3 +28,8 @@ saafaaari, 111dltldnjs@gmail.com
 ## License
 
 SFImagePicker is available under the MIT license. See the LICENSE file for more info.
+
+## Simulator
+
+
+<img src="https://user-images.githubusercontent.com/91936941/230787028-9b614bf9-a5bd-4c71-9c5f-089e4b0b96f5.gif" width="200">
