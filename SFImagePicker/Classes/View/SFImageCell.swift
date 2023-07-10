@@ -9,6 +9,7 @@ import UIKit
 
 final class SFImageCell: UICollectionViewCell {
   var representedAssetIdentifier: String!
+  var indicatorButtonDidTap: () -> Void = {}
   
   let imageView: UIImageView = {
     let imageView = UIImageView()
@@ -21,6 +22,7 @@ final class SFImageCell: UICollectionViewCell {
   
   override init(frame: CGRect = .zero) {
     super.init(frame: frame)
+    selectionIndicator.addTarget(self, action: #selector(indicatorButtonAction), for: .touchUpInside)
     configureUI()
   }
   
@@ -41,8 +43,13 @@ final class SFImageCell: UICollectionViewCell {
     addSubview(selectionIndicator)
     selectionIndicator.translatesAutoresizingMaskIntoConstraints = false
     NSLayoutConstraint.activate([
-      selectionIndicator.topAnchor.constraint(equalTo: self.topAnchor, constant: 15),
-      selectionIndicator.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -15)
+      selectionIndicator.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
+      selectionIndicator.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5)
     ])
+  }
+  
+  @objc
+  private func indicatorButtonAction() {
+    indicatorButtonDidTap()
   }
 }

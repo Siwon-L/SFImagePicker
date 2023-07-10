@@ -197,6 +197,16 @@ extension SFImagePicker: UICollectionViewDataSource {
     guard let asset = fetchResult?.object(at: indexPath.row) else { return cell }
     cell.representedAssetIdentifier = asset.localIdentifier
     cell.selectionIndicator.circleColor = settings.ui.selectedIndicatorColor
+    cell.indicatorButtonDidTap = { [weak self] in
+      guard let self = self else { return }
+      let cellIsInTheSelectionPool = self.isInselectionPool(indexPath: indexPath)
+
+      if cellIsInTheSelectionPool {
+        self.deSelect(indexPath: indexPath)
+      } else {
+        self.select(indexPath: indexPath)
+      }
+    }
     
     imageManager.requestImage(
       for: asset,
@@ -228,14 +238,7 @@ extension SFImagePicker: UICollectionViewDelegate {
     _ collectionView: UICollectionView,
     didSelectItemAt indexPath: IndexPath
   ) {
-    
-    let cellIsInTheSelectionPool = isInselectionPool(indexPath: indexPath)
-
-    if cellIsInTheSelectionPool {
-      deSelect(indexPath: indexPath)
-    } else {
-      select(indexPath: indexPath)
-    }
+    // 이미지 디테일
   }
 }
 
