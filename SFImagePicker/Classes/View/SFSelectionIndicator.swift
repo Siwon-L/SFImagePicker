@@ -7,12 +7,19 @@
 
 import UIKit
 
-final class SFSelectionIndicator: UIView {
+private class NotHitView: UIView {
+  override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+    let hitView = super.hitTest(point, with: event)
+    if self == hitView { return nil }
+    return hitView
+  }
+}
+
 final class SFSelectionIndicator: UIButton {
   var circleColor: UIColor = .systemBlue
   
-  let circle: UIView = {
-    let view = UIView()
+  private let circle: NotHitView = {
+    let view = NotHitView()
     return view
   }()
   
