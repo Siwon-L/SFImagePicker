@@ -8,6 +8,7 @@
 import UIKit
 
 final class SFSelectionIndicator: UIView {
+final class SFSelectionIndicator: UIButton {
   var circleColor: UIColor = .systemBlue
   
   let circle: UIView = {
