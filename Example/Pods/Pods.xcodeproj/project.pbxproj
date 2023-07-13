@@ -21,6 +21,7 @@
 		9B2F209F29179DCE0057ACFC /* SFPickerSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2F209E29179DCE0057ACFC /* SFPickerSelection.swift */; };
 		9B2F20A129179E660057ACFC /* SFPickerFetchOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2F20A029179E660057ACFC /* SFPickerFetchOptions.swift */; };
 		9B2F20A52917A0C70057ACFC /* SFPickerSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2F20A42917A0C70057ACFC /* SFPickerSettings.swift */; };
+		9B518D262A6006C700941FB0 /* SFDetailImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B518D252A6006C700941FB0 /* SFDetailImageViewController.swift */; };
 		9B598CAC2A5D380F009D5A79 /* SFImageDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B598CAB2A5D380F009D5A79 /* SFImageDetailView.swift */; };
 		9B68F071291B994300105A18 /* UICollectionViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6ECCAD2918DAB9007F92D2 /* UICollectionViewCell+Extension.swift */; };
 		9B68F072291B995000105A18 /* SFImagePickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B68F06F291B988D00105A18 /* SFImagePickerDelegate.swift */; };
@@ -80,6 +81,7 @@
 		9B2F209E29179DCE0057ACFC /* SFPickerSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFPickerSelection.swift; sourceTree = "<group>"; };
 		9B2F20A029179E660057ACFC /* SFPickerFetchOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFPickerFetchOptions.swift; sourceTree = "<group>"; };
 		9B2F20A42917A0C70057ACFC /* SFPickerSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFPickerSettings.swift; sourceTree = "<group>"; };
+		9B518D252A6006C700941FB0 /* SFDetailImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFDetailImageViewController.swift; sourceTree = "<group>"; };
 		9B598CAB2A5D380F009D5A79 /* SFImageDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFImageDetailView.swift; sourceTree = "<group>"; };
 		9B68F06F291B988D00105A18 /* SFImagePickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFImagePickerDelegate.swift; sourceTree = "<group>"; };
 		9B68F076291BA4C400105A18 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 				9B6ECCA82918D011007F92D2 /* SFImageCell.swift */,
 				9B6ECCAA2918D311007F92D2 /* SFImagePickerView.swift */,
 				9B598CAB2A5D380F009D5A79 /* SFImageDetailView.swift */,
+				9B518D252A6006C700941FB0 /* SFDetailImageViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -482,6 +485,7 @@
 				9B2F2095291767390057ACFC /* SFImagePicker.swift in Sources */,
 				9B68F072291B995000105A18 /* SFImagePickerDelegate.swift in Sources */,
 				9B2F20A129179E660057ACFC /* SFPickerFetchOptions.swift in Sources */,
+				9B518D262A6006C700941FB0 /* SFDetailImageViewController.swift in Sources */,
 				9B68F078291BA50300105A18 /* UIViewController+Extension.swift in Sources */,
 				9B68F074291B9A2A00105A18 /* SFImageCell.swift in Sources */,
 				9B2F209F29179DCE0057ACFC /* SFPickerSelection.swift in Sources */,
