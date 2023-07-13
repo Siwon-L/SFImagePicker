@@ -1,5 +1,5 @@
 //
-//  SFImageDatailView.swift
+//  SFImageDetailView.swift
 //  SFImagePicker
 //
 //  Created by 이시원 on 2023/07/11.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SFImageDatailView: UIView {
+final class SFImageDetailView: UIView {
   private(set) lazy var imageCollectionView: UICollectionView = {
     let collectionView = UICollectionView(
       frame: .zero,
@@ -39,7 +39,7 @@ final class SFImageDatailView: UIView {
   
 }
 
-extension SFImageDatailView {
+extension SFImageDetailView {
   private var collectionViewLayout: UICollectionViewCompositionalLayout {
     let itemSize = NSCollectionLayoutSize(
       widthDimension: .fractionalWidth(1),
