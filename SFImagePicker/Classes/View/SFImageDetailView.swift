@@ -35,6 +35,11 @@ final class SFImageDetailView: UIView {
       imageCollectionView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
       imageCollectionView.widthAnchor.constraint(equalTo: self.widthAnchor)
     ])
+    
+    imageCollectionView.register(
+      SFImageCell.self,
+      forCellWithReuseIdentifier: SFImageCell.identifier
+    )
   }
   
 }
