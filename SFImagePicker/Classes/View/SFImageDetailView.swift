@@ -30,10 +30,10 @@ final class SFImageDetailView: UIView {
     addSubview(imageCollectionView)
     imageCollectionView.translatesAutoresizingMaskIntoConstraints = false
     NSLayoutConstraint.activate([
-      imageCollectionView.topAnchor.constraint(equalTo: self.topAnchor),
-      imageCollectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
       imageCollectionView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-      imageCollectionView.widthAnchor.constraint(equalTo: self.widthAnchor)
+      imageCollectionView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+      imageCollectionView.widthAnchor.constraint(equalTo: self.widthAnchor),
+      imageCollectionView.heightAnchor.constraint(equalTo: imageCollectionView.widthAnchor)
     ])
     
     imageCollectionView.register(
