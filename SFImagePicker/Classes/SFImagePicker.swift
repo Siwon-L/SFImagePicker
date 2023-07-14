@@ -239,6 +239,9 @@ extension SFImagePicker: UICollectionViewDelegate {
     didSelectItemAt indexPath: IndexPath
   ) {
     // 이미지 디테일
+    let vc = SFDetailImageViewController(fetchResult: fetchResult!, settings: settings, selectedItems: selectedItems, indexPath: indexPath)
+    vc.modalPresentationStyle = .fullScreen
+    self.present(vc, animated: true)
   }
 }
 
