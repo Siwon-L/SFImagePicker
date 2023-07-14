@@ -62,7 +62,8 @@ extension SFDetailImageViewController {
     xMarkButton.setImage(.init(systemName: "xmark"), for: .normal)
     xMarkButton.tintColor = .systemGray6
     view.addSubview(xMarkButton)
-    xMarkButton.imageView?.translatesAutoresizingMaskIntoConstraints = false
+    xMarkButton.translatesAutoresizingMaskIntoConstraints = false
+    
     NSLayoutConstraint.activate([
       xMarkButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
       xMarkButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -8),
@@ -71,7 +72,7 @@ extension SFDetailImageViewController {
     ])
     
     if let xMarkImage = xMarkButton.imageView {
-      xMarkButton.translatesAutoresizingMaskIntoConstraints = false
+      xMarkImage.translatesAutoresizingMaskIntoConstraints = false
       NSLayoutConstraint.activate([
         xMarkImage.widthAnchor.constraint(equalTo: xMarkButton.widthAnchor),
         xMarkImage.heightAnchor.constraint(equalTo: xMarkButton.heightAnchor)
