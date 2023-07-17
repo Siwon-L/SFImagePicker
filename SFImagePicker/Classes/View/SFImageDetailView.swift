@@ -16,7 +16,7 @@ final class SFImageDetailView: UIView {
     collectionView.isScrollEnabled = false
     return collectionView
   }()
-  let navigationBar = UINavigationBar()
+  private let navigationBar = UINavigationBar()
   let navigationItem = UINavigationItem()
   let cancelButton = UIBarButtonItem(image: .init(systemName: "xmark"), style: .plain, target: nil, action: nil)
   let selectIndecator = SFSelectionIndicator(size: 30)
