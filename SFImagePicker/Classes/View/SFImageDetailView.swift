@@ -16,6 +16,10 @@ final class SFImageDetailView: UIView {
     collectionView.isScrollEnabled = false
     return collectionView
   }()
+  let navigationBar = UINavigationBar()
+  let navigationItem = UINavigationItem()
+  let cancelButton = UIBarButtonItem(image: .init(systemName: "xmark"), style: .plain, target: nil, action: nil)
+  let selectIndecator = SFSelectionIndicator(size: 30)
   
   init() {
     super.init(frame: .zero)
@@ -27,19 +31,46 @@ final class SFImageDetailView: UIView {
   }
   
   private func configureUI() {
+    let appearance = UINavigationBarAppearance()
+    appearance.backgroundColor = .black.withAlphaComponent(0.3)
+    appearance.backgroundEffect = nil
+    appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+    navigationBar.standardAppearance = appearance
+    navigationItem.leftBarButtonItem = cancelButton
+    navigationBar.items = [navigationItem]
+    navigationBar.tintColor = .white
+
+    
     addSubview(imageCollectionView)
     imageCollectionView.translatesAutoresizingMaskIntoConstraints = false
     NSLayoutConstraint.activate([
-      imageCollectionView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-      imageCollectionView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+      imageCollectionView.leftAnchor.constraint(equalTo: self.leftAnchor),
+      imageCollectionView.rightAnchor.constraint(equalTo: self.rightAnchor),
       imageCollectionView.widthAnchor.constraint(equalTo: self.widthAnchor),
-      imageCollectionView.heightAnchor.constraint(equalTo: imageCollectionView.widthAnchor)
+      imageCollectionView.topAnchor.constraint(equalTo: self.topAnchor),
+      imageCollectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
     ])
     
     imageCollectionView.register(
       SFImageCell.self,
       forCellWithReuseIdentifier: SFImageCell.identifier
     )
+    
+    addSubview(navigationBar)
+    navigationBar.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate([
+      navigationBar.topAnchor.constraint(equalTo: self.topAnchor),
+      navigationBar.rightAnchor.constraint(equalTo: self.rightAnchor),
+      navigationBar.leftAnchor.constraint(equalTo: self.leftAnchor),
+    ])
+    
+    
+    addSubview(selectIndecator)
+    selectIndecator.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate([
+      selectIndecator.topAnchor.constraint(equalTo: navigationBar.bottomAnchor, constant: 8),
+      selectIndecator.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -8)
+    ])
   }
   
 }
@@ -53,7 +84,7 @@ extension SFImageDetailView {
     let item = NSCollectionLayoutItem(layoutSize: itemSize)
     
     let groupSize = NSCollectionLayoutSize(
-      widthDimension: .fractionalHeight(1),
+      widthDimension: .fractionalWidth(1),
       heightDimension: .fractionalHeight(1)
     )
     let group = NSCollectionLayoutGroup.horizontal(
