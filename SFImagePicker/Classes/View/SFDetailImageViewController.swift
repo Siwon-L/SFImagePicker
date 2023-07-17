@@ -15,12 +15,10 @@ final class SFDetailImageViewController: UIViewController {
   private let settings: SFPickerSettings
   private var selectedItems: [SFAssetItem]
   private let currentIndexPath: IndexPath
-  private let xMarkButton = UIButton()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     mainView.imageCollectionView.dataSource = self
-    xMarkButton.addTarget(self, action: #selector(xMarkButtomDidTap), for: .touchUpInside)
     configuerUI()
   }
   
@@ -58,26 +56,6 @@ extension SFDetailImageViewController {
       mainView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
       mainView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor)
     ])
-    
-    xMarkButton.setImage(.init(systemName: "xmark"), for: .normal)
-    xMarkButton.tintColor = .systemGray6
-    view.addSubview(xMarkButton)
-    xMarkButton.translatesAutoresizingMaskIntoConstraints = false
-    
-    NSLayoutConstraint.activate([
-      xMarkButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-      xMarkButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -8),
-      xMarkButton.widthAnchor.constraint(equalToConstant: 25),
-      xMarkButton.heightAnchor.constraint(equalTo: xMarkButton.widthAnchor)
-    ])
-    
-    if let xMarkImage = xMarkButton.imageView {
-      xMarkImage.translatesAutoresizingMaskIntoConstraints = false
-      NSLayoutConstraint.activate([
-        xMarkImage.widthAnchor.constraint(equalTo: xMarkButton.widthAnchor),
-        xMarkImage.heightAnchor.constraint(equalTo: xMarkButton.heightAnchor)
-      ])
-    }
   }
 }
 
