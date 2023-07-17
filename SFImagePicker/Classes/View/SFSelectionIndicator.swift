@@ -31,9 +31,9 @@ final class SFSelectionIndicator: UIButton {
     return label
   }()
   
-  init() {
+  init(size: CGFloat) {
     super.init(frame: .zero)
-    configureUI()
+    configureUI(size: size)
     setNumber(nil)
   }
   
@@ -41,10 +41,10 @@ final class SFSelectionIndicator: UIButton {
     fatalError("init(coder:) has not been implemented")
   }
   
-  private func configureUI() {
+  private func configureUI(size: CGFloat) {
     addSubview(circle)
     addSubview(numberLabel)
-    let circleSize: CGFloat = 20
+    let circleSize: CGFloat = size
     circle.layer.cornerRadius = circleSize / 2.0
     circle.translatesAutoresizingMaskIntoConstraints = false
     NSLayoutConstraint.activate([

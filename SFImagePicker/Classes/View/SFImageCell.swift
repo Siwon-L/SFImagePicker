@@ -15,10 +15,11 @@ final class SFImageCell: UICollectionViewCell {
     let imageView = UIImageView()
     imageView.contentMode = .scaleAspectFill
     imageView.clipsToBounds = true
+    imageView.backgroundColor = .black
     return imageView
   }()
   
-  let selectionIndicator = SFSelectionIndicator()
+  let selectionIndicator = SFSelectionIndicator(size: 20)
   
   override init(frame: CGRect = .zero) {
     super.init(frame: frame)
