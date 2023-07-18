@@ -9,17 +9,27 @@ import UIKit
 import Photos
 
 final class SFDetailImageViewController: UIViewController {
-  let mainView = SFImageDetailView()
+  private let mainView: SFImageDetailView
   private let fetchResult: PHFetchResult<PHAsset>
   private let imageManager: PHCachingImageManager = .init()
   private let settings: SFPickerSettings
   private var selectedItems: [SFAssetItem]
   private let currentIndexPath: IndexPath
   
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     mainView.imageCollectionView.dataSource = self
+    mainView.imageCollectionView.delegate = self
+    mainView.cancelButton.target = self
+    mainView.cancelButton.action = #selector(cancelButtomDidTap)
     configuerUI()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    mainView.imageCollectionView.layoutIfNeeded()
+    mainView.imageCollectionView.scrollToItem(at: currentIndexPath, at: .bottom, animated: false)
   }
   
   init(
@@ -32,6 +42,7 @@ final class SFDetailImageViewController: UIViewController {
     self.settings = settings
     self.selectedItems = selectedItems
     self.currentIndexPath = indexPath
+    self.mainView = .init(totalImageCount: fetchResult.count)
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -40,7 +51,7 @@ final class SFDetailImageViewController: UIViewController {
   }
   
   @objc
-  private func xMarkButtomDidTap() {
+  private func cancelButtomDidTap() {
     dismiss(animated: true)
   }
 }
@@ -59,17 +70,17 @@ extension SFDetailImageViewController {
   }
 }
 
-// MARK: - UICollectionViewDataSource
+// MARK: - UICollectionViewDataSource & Delegate
 
-extension SFDetailImageViewController: UICollectionViewDataSource {
-  public func collectionView(
+extension SFDetailImageViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+  func collectionView(
     _ collectionView: UICollectionView,
     numberOfItemsInSection section: Int
   ) -> Int {
     return fetchResult.count
   }
   
-  public func collectionView(
+  func collectionView(
     _ collectionView: UICollectionView,
     cellForItemAt indexPath: IndexPath
   ) -> UICollectionViewCell {
@@ -81,9 +92,8 @@ extension SFDetailImageViewController: UICollectionViewDataSource {
     let asset = fetchResult.object(at: indexPath.row)
     cell.representedAssetIdentifier = asset.localIdentifier
     cell.selectionIndicator.circleColor = settings.ui.selectedIndicatorColor
-    cell.indicatorButtonDidTap = { [weak self] in
-      
-    }
+    cell.imageView.contentMode = .scaleAspectFit
+    cell.selectionIndicator.isHidden = true
     
     imageManager.requestImage(
       for: asset,

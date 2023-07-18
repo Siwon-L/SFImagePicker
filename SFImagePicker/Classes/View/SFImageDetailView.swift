@@ -11,17 +11,19 @@ final class SFImageDetailView: UIView {
   private(set) lazy var imageCollectionView: UICollectionView = {
     let collectionView = UICollectionView(
       frame: .zero,
-      collectionViewLayout: collectionViewLayout 
+      collectionViewLayout: collectionViewLayout
     )
     collectionView.isScrollEnabled = false
     return collectionView
   }()
   private let navigationBar = UINavigationBar()
-  let navigationItem = UINavigationItem()
+  private let navigationItem = UINavigationItem()
   let cancelButton = UIBarButtonItem(image: .init(systemName: "xmark"), style: .plain, target: nil, action: nil)
   let selectIndecator = SFSelectionIndicator(size: 30)
+  private let totalImageCount: Int
   
-  init() {
+  init(totalImageCount: Int) {
+    self.totalImageCount = totalImageCount
     super.init(frame: .zero)
     configureUI()
   }
@@ -94,6 +96,18 @@ extension SFImageDetailView {
     
     let section = NSCollectionLayoutSection(group: group)
     section.orthogonalScrollingBehavior = .paging
+    
+    section.visibleItemsInvalidationHandler = { [weak self] _, point, environment in
+      guard let self = self else { return }
+      
+      let currentPoint = point.x
+      let collectionViewWidth = environment.container.contentSize.width
+      
+      let currentPage = round(currentPoint / collectionViewWidth)
+      
+      self.navigationItem.title = "\(Int(currentPage) + 1)/\(self.totalImageCount)"
+    }
+    
     return UICollectionViewCompositionalLayout(section: section)
   }
 }
