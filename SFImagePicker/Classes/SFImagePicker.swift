@@ -114,12 +114,6 @@ extension SFImagePicker {
 }
 
 extension SFImagePicker {
-  private func isInselectionPool(indexPath: IndexPath) -> Bool {
-    return selectedItems.contains {
-      $0.assetIdentifier == fetchResult?.object(at: indexPath.row).localIdentifier
-    }
-  }
-  
   private func deSelect(indexPath: IndexPath) {
     if let positionIndex = selectedItems.firstIndex(where: {
       $0.assetIdentifier == fetchResult?.object(at: indexPath.row).localIdentifier
@@ -200,7 +194,11 @@ extension SFImagePicker: UICollectionViewDataSource {
     cell.selectionIndicator.textColor = settings.ui.selectedIndicatorTextColor
     cell.indicatorButtonDidTap = { [weak self] in
       guard let self = self else { return }
-      let cellIsInTheSelectionPool = self.isInselectionPool(indexPath: indexPath)
+      
+      let cellIsInTheSelectionPool = self.selectedItems.isInselectionPool(
+        id: asset.localIdentifier,
+        indexPath: indexPath
+      )
 
       if cellIsInTheSelectionPool {
         self.deSelect(indexPath: indexPath)

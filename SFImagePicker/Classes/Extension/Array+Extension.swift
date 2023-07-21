@@ -6,3 +6,12 @@
 //
 
 import Foundation
+import Photos
+
+extension Array where Element: SFAssetItem {
+  func isInselectionPool(id: String, indexPath: IndexPath) -> Bool {
+    return self.contains {
+      $0.assetIdentifier == id
+    }
+  }
+}
