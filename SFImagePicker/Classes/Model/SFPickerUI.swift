@@ -9,10 +9,13 @@ import UIKit
 
 public struct SFPickerUI {
   public var selectedIndicatorColor: UIColor
+  public var selectedIndicatorTextColor: UIColor
   
   init(
-    selectedIndicatorColor: UIColor = .systemBlue
+    selectedIndicatorColor: UIColor = .systemBlue,
+    selectedIndicatorTextColor: UIColor = .white
   ) {
     self.selectedIndicatorColor = selectedIndicatorColor
+    self.selectedIndicatorTextColor = selectedIndicatorTextColor
   }
 }

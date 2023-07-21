@@ -67,6 +67,8 @@ extension SFDetailImageViewController {
       mainView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
       mainView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor)
     ])
+    mainView.selectIndecator.circleColor = settings.ui.selectedIndicatorColor
+    mainView.selectIndecator.textColor = settings.ui.selectedIndicatorTextColor
   }
 }
 
@@ -91,7 +93,6 @@ extension SFDetailImageViewController: UICollectionViewDataSource, UICollectionV
     
     let asset = fetchResult.object(at: indexPath.row)
     cell.representedAssetIdentifier = asset.localIdentifier
-    cell.selectionIndicator.circleColor = settings.ui.selectedIndicatorColor
     cell.imageView.contentMode = .scaleAspectFit
     cell.selectionIndicator.isHidden = true
     

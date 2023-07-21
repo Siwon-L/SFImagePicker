@@ -197,6 +197,7 @@ extension SFImagePicker: UICollectionViewDataSource {
     guard let asset = fetchResult?.object(at: indexPath.row) else { return cell }
     cell.representedAssetIdentifier = asset.localIdentifier
     cell.selectionIndicator.circleColor = settings.ui.selectedIndicatorColor
+    cell.selectionIndicator.textColor = settings.ui.selectedIndicatorTextColor
     cell.indicatorButtonDidTap = { [weak self] in
       guard let self = self else { return }
       let cellIsInTheSelectionPool = self.isInselectionPool(indexPath: indexPath)

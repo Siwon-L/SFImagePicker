@@ -17,17 +17,16 @@ private class NotHitView: UIView {
 
 final class SFSelectionIndicator: UIButton {
   var circleColor: UIColor = .systemBlue
+  var textColor: UIColor = .white
   
   private let circle: NotHitView = {
     let view = NotHitView()
     return view
   }()
   
-  let numberLabel: UILabel = {
+  private let numberLabel: UILabel = {
     let label = UILabel()
-    label.textColor = .white
     label.textAlignment = .center
-    label.font = .systemFont(ofSize: 11)
     return label
   }()
   
@@ -55,6 +54,7 @@ final class SFSelectionIndicator: UIButton {
     ])
     
     numberLabel.translatesAutoresizingMaskIntoConstraints = false
+    numberLabel.font = .systemFont(ofSize: size * 0.6)
     NSLayoutConstraint.activate([
       numberLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
       numberLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor)
@@ -67,6 +67,7 @@ final class SFSelectionIndicator: UIButton {
       circle.backgroundColor = circleColor
       circle.layer.borderColor = UIColor.clear.cgColor
       circle.layer.borderWidth = 0
+      numberLabel.textColor = textColor
       numberLabel.text = "\(number)"
     } else {
       circle.backgroundColor = UIColor.white.withAlphaComponent(0.3)
