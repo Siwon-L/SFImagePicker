@@ -29,6 +29,7 @@
 		9B68F074291B9A2A00105A18 /* SFImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6ECCA82918D011007F92D2 /* SFImageCell.swift */; };
 		9B68F075291B9A2C00105A18 /* SFImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6ECCAA2918D311007F92D2 /* SFImagePickerView.swift */; };
 		9B68F078291BA50300105A18 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B68F076291BA4C400105A18 /* UIViewController+Extension.swift */; };
+		9BE2F4742A6A83C000D8E018 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE2F4732A6A83C000D8E018 /* Array+Extension.swift */; };
 		9DC2AE13FB690EDAEA79B76740E1B4DE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAB6F611E86A4758835A715E4B4184F6 /* Foundation.framework */; };
 		AEFC7FC103A9E48A1C0A694A462AC5A1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAB6F611E86A4758835A715E4B4184F6 /* Foundation.framework */; };
 		BF59878114113A97718470C132C76A7C /* Pods-SFImagePicker_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 21B67220352037E52D227CD3DB1EF75C /* Pods-SFImagePicker_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -89,6 +90,7 @@
 		9B6ECCA82918D011007F92D2 /* SFImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFImageCell.swift; sourceTree = "<group>"; };
 		9B6ECCAA2918D311007F92D2 /* SFImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFImagePickerView.swift; sourceTree = "<group>"; };
 		9B6ECCAD2918DAB9007F92D2 /* UICollectionViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+Extension.swift"; sourceTree = "<group>"; };
+		9BE2F4732A6A83C000D8E018 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A5D8250DD23C0CC6565DE125CDEED5D4 /* Pods-SFImagePicker_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SFImagePicker_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		AB2EC35B0B6EDD6C370784EC135E33E9 /* Pods-SFImagePicker_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SFImagePicker_Tests-umbrella.h"; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 			children = (
 				9B6ECCAD2918DAB9007F92D2 /* UICollectionViewCell+Extension.swift */,
 				9B68F076291BA4C400105A18 /* UIViewController+Extension.swift */,
+				9BE2F4732A6A83C000D8E018 /* Array+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -485,6 +488,7 @@
 				9B2F2095291767390057ACFC /* SFImagePicker.swift in Sources */,
 				9B68F072291B995000105A18 /* SFImagePickerDelegate.swift in Sources */,
 				9B2F20A129179E660057ACFC /* SFPickerFetchOptions.swift in Sources */,
+				9BE2F4742A6A83C000D8E018 /* Array+Extension.swift in Sources */,
 				9B518D262A6006C700941FB0 /* SFDetailImageViewController.swift in Sources */,
 				9B68F078291BA50300105A18 /* UIViewController+Extension.swift in Sources */,
 				9B68F074291B9A2A00105A18 /* SFImageCell.swift in Sources */,
