@@ -8,6 +8,9 @@
 import UIKit
 
 final class SFImageDetailView: UIView {
+  var indicatorButtonDidTap: () -> Void = {}
+  var imageDidScroll: () -> Void = {}
+  
   private(set) lazy var imageCollectionView: UICollectionView = {
     let collectionView = UICollectionView(
       frame: .zero,
@@ -16,6 +19,7 @@ final class SFImageDetailView: UIView {
     collectionView.isScrollEnabled = false
     return collectionView
   }()
+  
   private let navigationBar = UINavigationBar()
   private let navigationItem = UINavigationItem()
   let cancelButton = UIBarButtonItem(image: .init(systemName: "xmark"), style: .plain, target: nil, action: nil)
@@ -30,6 +34,11 @@ final class SFImageDetailView: UIView {
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  @objc
+  private func indicatorButtonAction() {
+    indicatorButtonDidTap()
   }
   
   private func configureUI() {
@@ -69,6 +78,7 @@ final class SFImageDetailView: UIView {
     
     addSubview(selectIndecator)
     selectIndecator.translatesAutoresizingMaskIntoConstraints = false
+    selectIndecator.addTarget(self, action: #selector(indicatorButtonAction), for: .touchUpInside)
     NSLayoutConstraint.activate([
       selectIndecator.topAnchor.constraint(equalTo: navigationBar.bottomAnchor, constant: 8),
       selectIndecator.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -8)
@@ -76,6 +86,8 @@ final class SFImageDetailView: UIView {
   }
   
 }
+
+// MARK: - UICollectionLayout
 
 extension SFImageDetailView {
   private var collectionViewLayout: UICollectionViewCompositionalLayout {
@@ -106,6 +118,7 @@ extension SFImageDetailView {
       let currentPage = round(currentPoint / collectionViewWidth)
       
       self.navigationItem.title = "\(Int(currentPage) + 1)/\(self.totalImageCount)"
+      self.imageDidScroll()
     }
     
     return UICollectionViewCompositionalLayout(section: section)

@@ -24,6 +24,7 @@ final class SFDetailImageViewController: UIViewController {
     mainView.cancelButton.target = self
     mainView.cancelButton.action = #selector(cancelButtomDidTap)
     configuerUI()
+    bindAction()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -56,6 +57,8 @@ final class SFDetailImageViewController: UIViewController {
   }
 }
 
+// MARK: - Methods
+
 extension SFDetailImageViewController {
   private func configuerUI() {
     view.backgroundColor = .black
@@ -69,6 +72,20 @@ extension SFDetailImageViewController {
     ])
     mainView.selectIndecator.circleColor = settings.ui.selectedIndicatorColor
     mainView.selectIndecator.textColor = settings.ui.selectedIndicatorTextColor
+  }
+  
+  private func bindAction() {
+    mainView.indicatorButtonDidTap = { [weak self] in
+      guard let self = self else { return }
+      
+      
+    }
+    
+    mainView.imageDidScroll = { [weak self] in
+      guard let self = self else { return }
+      
+      
+    }
   }
 }
 
