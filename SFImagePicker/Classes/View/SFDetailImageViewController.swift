@@ -70,8 +70,8 @@ extension SFDetailImageViewController {
       mainView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
       mainView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor)
     ])
-    mainView.selectIndecator.circleColor = settings.ui.selectedIndicatorColor
-    mainView.selectIndecator.textColor = settings.ui.selectedIndicatorTextColor
+    mainView.selectionIndicator.circleColor = settings.ui.selectedIndicatorColor
+    mainView.selectionIndicator.textColor = settings.ui.selectedIndicatorTextColor
   }
   
   private func bindAction() {
@@ -81,10 +81,16 @@ extension SFDetailImageViewController {
       
     }
     
-    mainView.imageDidScroll = { [weak self] in
+    mainView.imageDidScroll = { [weak self] indexPath in
       guard let self = self else { return }
-      
-      
+      let asset = self.fetchResult.object(at: indexPath.row)
+      if let index = self.selectedItems.firstIndex(
+        where: { $0.assetIdentifier == asset.localIdentifier }
+      ) {
+        self.mainView.selectionIndicator.setNumber(index + 1)
+      } else {
+        self.mainView.selectionIndicator.setNumber(nil)
+      }
     }
   }
 }

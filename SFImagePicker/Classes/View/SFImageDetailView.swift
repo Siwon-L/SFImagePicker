@@ -9,7 +9,7 @@ import UIKit
 
 final class SFImageDetailView: UIView {
   var indicatorButtonDidTap: () -> Void = {}
-  var imageDidScroll: () -> Void = {}
+  var imageDidScroll: (_ indexPath :IndexPath) -> Void = {_ in }
   
   private(set) lazy var imageCollectionView: UICollectionView = {
     let collectionView = UICollectionView(
@@ -23,7 +23,7 @@ final class SFImageDetailView: UIView {
   private let navigationBar = UINavigationBar()
   private let navigationItem = UINavigationItem()
   let cancelButton = UIBarButtonItem(image: .init(systemName: "xmark"), style: .plain, target: nil, action: nil)
-  let selectIndecator = SFSelectionIndicator(size: 30)
+  let selectionIndicator = SFSelectionIndicator(size: 30)
   private let totalImageCount: Int
   
   init(totalImageCount: Int) {
@@ -76,12 +76,12 @@ final class SFImageDetailView: UIView {
     ])
     
     
-    addSubview(selectIndecator)
-    selectIndecator.translatesAutoresizingMaskIntoConstraints = false
-    selectIndecator.addTarget(self, action: #selector(indicatorButtonAction), for: .touchUpInside)
+    addSubview(selectionIndicator)
+    selectionIndicator.translatesAutoresizingMaskIntoConstraints = false
+    selectionIndicator.addTarget(self, action: #selector(indicatorButtonAction), for: .touchUpInside)
     NSLayoutConstraint.activate([
-      selectIndecator.topAnchor.constraint(equalTo: navigationBar.bottomAnchor, constant: 8),
-      selectIndecator.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -8)
+      selectionIndicator.topAnchor.constraint(equalTo: navigationBar.bottomAnchor, constant: 8),
+      selectionIndicator.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -8)
     ])
   }
   
@@ -118,7 +118,7 @@ extension SFImageDetailView {
       let currentPage = round(currentPoint / collectionViewWidth)
       
       self.navigationItem.title = "\(Int(currentPage) + 1)/\(self.totalImageCount)"
-      self.imageDidScroll()
+      self.imageDidScroll(IndexPath(row: Int(currentPage), section: 0))
     }
     
     return UICollectionViewCompositionalLayout(section: section)
