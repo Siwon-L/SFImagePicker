@@ -2,7 +2,7 @@
 import Photos
 import UIKit
 
-public final class SFImagePicker: UIViewController {
+public final class SFImagePicker: UIViewController, Alertable {
   public weak var delegate: SFImagePickerDelegate?
   private var fetchResult: PHFetchResult<PHAsset>?
   private let imageManager: PHCachingImageManager = .init()
@@ -143,7 +143,9 @@ extension SFImagePicker {
         selectedItems.append(newSelectionItem)
         onSelection?(newSelectionItem.imageManager)
       } else {
-        showAlert()
+        let message = "이미지는 최대 \(selectionLimit)장까지 첨부할 수 있습니다."
+        let alert = makeAlert(message: message)
+        present(alert, animated: true)
       }
     } else {
       selectedItems.append(newSelectionItem)
@@ -155,19 +157,7 @@ extension SFImagePicker {
 
 // MARK: - Alert
 
-extension SFImagePicker {
-  private func showAlert() {
-    guard let selectionLimit = settings.selection.max else { return }
-    let alert = UIAlertController(
-      title: nil,
-      message: "이미지는 최대 \(selectionLimit)장까지 첨부할 수 있습니다.",
-      preferredStyle: .alert
-    )
-    let okAction = UIAlertAction(title: "확인", style: .default)
-    alert.addAction(okAction)
-    present(alert, animated: true)
-  }
-}
+
 
 // MARK: - UICollectionViewDataSource
 
