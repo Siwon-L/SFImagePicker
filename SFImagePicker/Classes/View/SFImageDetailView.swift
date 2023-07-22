@@ -9,7 +9,7 @@ import UIKit
 
 final class SFImageDetailView: UIView {
   var indicatorButtonDidTap: () -> Void = {}
-  var imageDidScroll: (_ indexPath :IndexPath) -> Void = {_ in }
+  var imageDidScroll: (IndexPath) -> Void = {_ in }
   
   private(set) lazy var imageCollectionView: UICollectionView = {
     let collectionView = UICollectionView(
