@@ -264,6 +264,7 @@
 		9B68F06E291B983400105A18 /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
+				9BE49E792A6E584400A46E8D /* DetailViewDelegate.swift */,
 				9B68F06F291B988D00105A18 /* SFImagePickerDelegate.swift */,
 			);
 			path = Delegates;
@@ -295,7 +296,6 @@
 			isa = PBXGroup;
 			children = (
 				9BE2F4762A6B86DD00D8E018 /* Alertable.swift */,
-				9BE49E792A6E584400A46E8D /* DetailViewDelegate.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
