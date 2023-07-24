@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+protocol DetailViewDelegate: AnyObject {
+  func detailView(didSelectItemAt indexPath: IndexPath)
+}
