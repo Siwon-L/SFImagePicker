@@ -2,6 +2,15 @@
 import Photos
 import UIKit
 
+private var key: Void?
+
+public extension UIView {
+  var imageID: UUID? {
+      get { objc_getAssociatedObject(self, &key) as? UUID }
+      set { objc_setAssociatedObject(self, &key, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
+    }
+}
+
 public final class SFImagePicker: UIViewController, Alertable {
   public weak var delegate: SFImagePickerDelegate?
   private var fetchResult: PHFetchResult<PHAsset>?
@@ -83,7 +92,7 @@ public final class SFImagePicker: UIViewController, Alertable {
   
   @objc
   private func addButtomDidTap() {
-    let assetManagers = selectedItems.map { $0.imageManager }
+    let assetManagers = selectedItems.compactMap { $0.imageManager }
     delegate?.picker(picker: self, results: assetManagers)
     onFinish?(assetManagers)
     dismiss(animated: true)
@@ -92,7 +101,7 @@ public final class SFImagePicker: UIViewController, Alertable {
   @objc
   private func cancelButtomDidTap() {
     delegate?.picker(picker: self, results: [])
-    onCancel?(selectedItems.map { $0.imageManager })
+    onCancel?(selectedItems.compactMap { $0.imageManager })
     dismiss(animated: true)
   }
 }
@@ -119,7 +128,8 @@ extension SFImagePicker {
       $0.assetIdentifier == fetchResult?.object(at: indexPath.row).localIdentifier
     }) {
       let removeItem = selectedItems.remove(at: positionIndex)
-      onDeSelction?(removeItem.imageManager)
+      guard let removeItemImageManager = removeItem.imageManager else { return }
+      onDeSelction?(removeItemImageManager)
       let selectedIndexPaths = selectedItems.map {
         IndexPath(row: $0.index, section: 0)
       }
@@ -138,10 +148,11 @@ extension SFImagePicker {
         fatchOptions: settings.fetchOptions.options
       )
     )
+    guard let newItemImageManager = newSelectionItem.imageManager else { return }
     if let selectionLimit = settings.selection.max {
       if selectionLimit > selectedItems.count {
         selectedItems.append(newSelectionItem)
-        onSelection?(newSelectionItem.imageManager)
+        onSelection?(newItemImageManager)
       } else {
         let message = "이미지는 최대 \(selectionLimit)장까지 첨부할 수 있습니다."
         let alert = makeAlert(message: message)
@@ -149,7 +160,7 @@ extension SFImagePicker {
       }
     } else {
       selectedItems.append(newSelectionItem)
-      onSelection?(newSelectionItem.imageManager)
+      onSelection?(newItemImageManager)
     }
     mainView.photoCollectionView.reloadItems(at: [indexPath])
   }
@@ -229,8 +240,27 @@ extension SFImagePicker: UICollectionViewDelegate {
   ) {
     // 이미지 디테일
     let vc = SFDetailImageViewController(fetchResult: fetchResult!, settings: settings, selectedItems: selectedItems, indexPath: indexPath)
+    vc.delegate = self
     vc.modalPresentationStyle = .fullScreen
     self.present(vc, animated: true)
+  }
+}
+
+//MARK: - DetailViewDelegate
+
+extension SFImagePicker: DetailViewDelegate {
+  func detailView(didSelectItemAt indexPath: IndexPath) {
+    guard let asset = fetchResult?.object(at: indexPath.row) else { return }
+    let cellIsInTheSelectionPool = self.selectedItems.isInselectionPool(
+      id: asset.localIdentifier,
+      indexPath: indexPath
+    )
+
+    if cellIsInTheSelectionPool {
+      self.deSelect(indexPath: indexPath)
+    } else {
+      self.select(indexPath: indexPath)
+    }
   }
 }
 

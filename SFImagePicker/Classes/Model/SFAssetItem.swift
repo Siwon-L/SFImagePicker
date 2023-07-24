@@ -10,12 +10,12 @@ import Foundation
 final class SFAssetItem {
   let index: Int
   let assetIdentifier: String
-  let imageManager: SFImageManager
+  let imageManager: SFImageManager?
   
   init(
     index: Int,
     assetIdentifier: String,
-    imageManager: SFImageManager
+    imageManager: SFImageManager?
   ) {
     self.index = index
     self.assetIdentifier = assetIdentifier

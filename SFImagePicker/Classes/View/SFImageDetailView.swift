@@ -8,7 +8,9 @@
 import UIKit
 
 final class SFImageDetailView: UIView {
-  var indicatorButtonDidTap: () -> Void = {}
+  private var currentPageIndexPath: IndexPath?
+  
+  var indicatorButtonDidTap: (IndexPath) -> Void = {_ in }
   var imageDidScroll: (IndexPath) -> Void = {_ in }
   
   private(set) lazy var imageCollectionView: UICollectionView = {
@@ -38,7 +40,8 @@ final class SFImageDetailView: UIView {
   
   @objc
   private func indicatorButtonAction() {
-    indicatorButtonDidTap()
+    guard let currentPageIndexPath = currentPageIndexPath else { return }
+    indicatorButtonDidTap(currentPageIndexPath)
   }
   
   private func configureUI() {
@@ -118,7 +121,10 @@ extension SFImageDetailView {
       let currentPage = round(currentPoint / collectionViewWidth)
       
       self.navigationItem.title = "\(Int(currentPage) + 1)/\(self.totalImageCount)"
-      self.imageDidScroll(IndexPath(row: Int(currentPage), section: 0))
+      self.currentPageIndexPath = IndexPath(row: Int(currentPage), section: 0)
+      if let currentPageIndexPath = self.currentPageIndexPath {
+        self.imageDidScroll(currentPageIndexPath)
+      }
     }
     
     return UICollectionViewCompositionalLayout(section: section)

@@ -8,13 +8,14 @@
 import UIKit
 import Photos
 
-final class SFDetailImageViewController: UIViewController {
+final class SFDetailImageViewController: UIViewController, Alertable {
   private let mainView: SFImageDetailView
   private let fetchResult: PHFetchResult<PHAsset>
   private let imageManager: PHCachingImageManager = .init()
   private let settings: SFPickerSettings
   private var selectedItems: [SFAssetItem]
   private let currentIndexPath: IndexPath
+  weak var delegate: DetailViewDelegate?
   
   
   override func viewDidLoad() {
@@ -75,10 +76,29 @@ extension SFDetailImageViewController {
   }
   
   private func bindAction() {
-    mainView.indicatorButtonDidTap = { [weak self] in
+    mainView.indicatorButtonDidTap = { [weak self] indexPath in
       guard let self = self else { return }
+      self.delegate?.detailView(didSelectItemAt: indexPath)
+      let asset = self.fetchResult.object(at: indexPath.row)
       
+      let cellIsInTheSelectionPool = self.selectedItems.isInselectionPool(
+        id: asset.localIdentifier,
+        indexPath: indexPath
+      )
+
+      if cellIsInTheSelectionPool {
+        self.deSelect(indexPath: indexPath)
+      } else {
+        self.select(indexPath: indexPath)
+      }
       
+      if let index = self.selectedItems.firstIndex(
+        where: { $0.assetIdentifier == asset.localIdentifier }
+      ) {
+        self.mainView.selectionIndicator.setNumber(index + 1)
+      } else {
+        self.mainView.selectionIndicator.setNumber(nil)
+      }
     }
     
     mainView.imageDidScroll = { [weak self] indexPath in
@@ -91,6 +111,34 @@ extension SFDetailImageViewController {
       } else {
         self.mainView.selectionIndicator.setNumber(nil)
       }
+    }
+  }
+  
+  private func deSelect(indexPath: IndexPath) {
+    if let positionIndex = selectedItems.firstIndex(where: {
+      $0.assetIdentifier == fetchResult.object(at: indexPath.row).localIdentifier
+    }) {
+      selectedItems.remove(at: positionIndex)
+    }
+  }
+  
+  private func select(indexPath: IndexPath) {
+    let asset = fetchResult.object(at: indexPath.row)
+    let newSelectionItem = SFAssetItem(
+      index: indexPath.row,
+      assetIdentifier: asset.localIdentifier,
+      imageManager: nil
+    )
+    if let selectionLimit = settings.selection.max {
+      if selectionLimit > selectedItems.count {
+        selectedItems.append(newSelectionItem)
+      } else {
+        let message = "이미지는 최대 \(selectionLimit)장까지 첨부할 수 있습니다."
+        let alert = makeAlert(message: message)
+        present(alert, animated: true)
+      }
+    } else {
+      selectedItems.append(newSelectionItem)
     }
   }
 }

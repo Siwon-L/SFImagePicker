@@ -11,7 +11,6 @@ import UIKit
 import SnapKit
 
 final class ImageView: UIView {
-  var imageID: UUID?
   
   var image: UIImage {
     get {
