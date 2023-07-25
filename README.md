@@ -17,7 +17,7 @@ To be able to request permission to the users photo library you need to add this
 
 ##### Image picker
 ```swift
-import BSImagePicker
+import SFImagePicker
 
 let imagePicker = SFImagePicker()
 
