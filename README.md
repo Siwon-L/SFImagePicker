@@ -31,5 +31,6 @@ SFImagePicker is available under the MIT license. See the LICENSE file for more 
 
 ## Simulator
 
-
-<img src="https://user-images.githubusercontent.com/91936941/230787028-9b614bf9-a5bd-4c71-9c5f-089e4b0b96f5.gif" width="200">
+| Main | Detail |
+|--|--|
+|<img src="https://github.com/Siwon-L/SFImagePicker/assets/91936941/3d369f67-f0c6-45b6-9a8f-074c148b133e" width="200">|<img src="https://github.com/Siwon-L/SFImagePicker/assets/91936941/75049b40-5e94-4df0-9f53-bd1176cfd108" width="200">|
