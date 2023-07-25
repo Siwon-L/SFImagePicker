@@ -35,7 +35,7 @@ presentImagePicker(imagePicker, animated: true) { (imageManager) in
 ##### SFImageManager
 You need to get the image through acquired imageManager.
 ```swift
-let imageView = ImageView()
+let imageView = UIImageView()
 let size = CGSize(width: 30, height: 30)
 imageManager.request(size: size) { image, _ in
   imageView.imageID = imageManager.assetID
