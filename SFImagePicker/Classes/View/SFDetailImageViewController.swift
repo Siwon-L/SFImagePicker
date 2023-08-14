@@ -6,14 +6,11 @@
 //
 
 import UIKit
-import Photos
 
 final class SFDetailImageViewController: UIViewController, Alertable {
   private let mainView: SFImageDetailView
-  private let fetchResult: PHFetchResult<PHAsset>
-  private let imageManager: PHCachingImageManager = .init()
-  private let settings: SFPickerSettings
-  private var selectedItems: [SFAssetItem]
+  private let settings: SFPickerSettings = .shared
+  private let photosManager: SFPhotosManager
   private let currentIndexPath: IndexPath
   weak var delegate: DetailViewDelegate?
   
@@ -35,16 +32,13 @@ final class SFDetailImageViewController: UIViewController, Alertable {
   }
   
   init(
-    fetchResult: PHFetchResult<PHAsset>,
-    settings: SFPickerSettings,
-    selectedItems: [SFAssetItem],
+    photosManager: SFPhotosManager,
+    imageCount: Int,
     indexPath: IndexPath
   ) {
-    self.fetchResult = fetchResult
-    self.settings = settings
-    self.selectedItems = selectedItems
+    self.photosManager = photosManager
     self.currentIndexPath = indexPath
-    self.mainView = .init(totalImageCount: fetchResult.count)
+    self.mainView = .init(totalImageCount: imageCount)
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -79,22 +73,21 @@ extension SFDetailImageViewController {
     mainView.indicatorButtonDidTap = { [weak self] indexPath in
       guard let self = self else { return }
       self.delegate?.detailView(didSelectItemAt: indexPath)
-      let asset = self.fetchResult.object(at: indexPath.row)
+      guard let asset = self.photosManager.getAsset(at: indexPath.row) else { return }
       
-      let cellIsInTheSelectionPool = self.selectedItems.isInselectionPool(
-        id: asset.localIdentifier,
-        indexPath: indexPath
-      )
+      let item = self.photosManager.getItem(id: asset.localIdentifier)
 
-      if cellIsInTheSelectionPool {
-        self.deSelect(indexPath: indexPath)
-      } else {
-        self.select(indexPath: indexPath)
+      if item == nil {
+        if let selectionLimit = settings.selection.max {
+          if selectionLimit <= photosManager.selectedItemCount {
+            let message = "이미지는 최대 \(selectionLimit)장까지 첨부할 수 있습니다."
+            let alert = makeAlert(message: message)
+            present(alert, animated: true)
+          }
+        }
       }
       
-      if let index = self.selectedItems.firstIndex(
-        where: { $0.assetIdentifier == asset.localIdentifier }
-      ) {
+      if let index = photosManager.getItemIndex(id: asset.localIdentifier) {
         self.mainView.selectionIndicator.setNumber(index + 1)
       } else {
         self.mainView.selectionIndicator.setNumber(nil)
@@ -103,42 +96,12 @@ extension SFDetailImageViewController {
     
     mainView.imageDidScroll = { [weak self] indexPath in
       guard let self = self else { return }
-      let asset = self.fetchResult.object(at: indexPath.row)
-      if let index = self.selectedItems.firstIndex(
-        where: { $0.assetIdentifier == asset.localIdentifier }
-      ) {
+      guard let asset = self.photosManager.getAsset(at: indexPath.row) else { return }
+      if let index = self.photosManager.getItemIndex(id: asset.localIdentifier) {
         self.mainView.selectionIndicator.setNumber(index + 1)
       } else {
         self.mainView.selectionIndicator.setNumber(nil)
       }
-    }
-  }
-  
-  private func deSelect(indexPath: IndexPath) {
-    if let positionIndex = selectedItems.firstIndex(where: {
-      $0.assetIdentifier == fetchResult.object(at: indexPath.row).localIdentifier
-    }) {
-      selectedItems.remove(at: positionIndex)
-    }
-  }
-  
-  private func select(indexPath: IndexPath) {
-    let asset = fetchResult.object(at: indexPath.row)
-    let newSelectionItem = SFAssetItem(
-      index: indexPath.row,
-      assetIdentifier: asset.localIdentifier,
-      imageManager: nil
-    )
-    if let selectionLimit = settings.selection.max {
-      if selectionLimit > selectedItems.count {
-        selectedItems.append(newSelectionItem)
-      } else {
-        let message = "이미지는 최대 \(selectionLimit)장까지 첨부할 수 있습니다."
-        let alert = makeAlert(message: message)
-        present(alert, animated: true)
-      }
-    } else {
-      selectedItems.append(newSelectionItem)
     }
   }
 }
@@ -150,7 +113,7 @@ extension SFDetailImageViewController: UICollectionViewDataSource, UICollectionV
     _ collectionView: UICollectionView,
     numberOfItemsInSection section: Int
   ) -> Int {
-    return fetchResult.count
+    return photosManager.assetCount ?? 0
   }
   
   func collectionView(
@@ -162,12 +125,12 @@ extension SFDetailImageViewController: UICollectionViewDataSource, UICollectionV
       for: indexPath
     ) as? SFImageCell ?? SFImageCell()
     
-    let asset = fetchResult.object(at: indexPath.row)
+    guard let asset = photosManager.getAsset(at: indexPath.row) else { return SFImageCell() }
     cell.representedAssetIdentifier = asset.localIdentifier
     cell.imageView.contentMode = .scaleAspectFit
     cell.selectionIndicator.isHidden = true
     
-    imageManager.requestImage(
+      photosManager.imageManager.requestImage(
       for: asset,
       targetSize: cell.bounds.size,
       contentMode: .aspectFill,
@@ -176,14 +139,6 @@ extension SFDetailImageViewController: UICollectionViewDataSource, UICollectionV
       if cell.representedAssetIdentifier == asset.localIdentifier && image != nil {
         cell.imageView.image = image
       }
-    }
-    
-    if let index = selectedItems.firstIndex(
-      where: { $0.assetIdentifier == asset.localIdentifier }
-    ) {
-      cell.selectionIndicator.setNumber(index + 1)
-    } else {
-      cell.selectionIndicator.setNumber(nil)
     }
     
     return cell

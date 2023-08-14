@@ -2,28 +2,12 @@
 import Photos
 import UIKit
 
-private var key: Void?
-
-public extension UIView {
-  var imageID: UUID? {
-      get { objc_getAssociatedObject(self, &key) as? UUID }
-      set { objc_setAssociatedObject(self, &key, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
-    }
-}
-
 public final class SFImagePicker: UIViewController, Alertable {
+  private let photosManager = SFPhotosManager()
   public weak var delegate: SFImagePickerDelegate?
-  private var fetchResult: PHFetchResult<PHAsset>?
-  private let imageManager: PHCachingImageManager = .init()
   private let mainView = SFImagePickerView()
-  public let settings = SFPickerSettings()
+  public let settings = SFPickerSettings.shared
   
-  private var selectedItems = [SFAssetItem]() {
-    didSet {
-      mainView.setSelectionCount(selectedItems.count)
-      mainView.addButton.isEnabled = selectedItems.count >= settings.selection.min
-    }
-  }
   var onSelection: ((_ imageManager: SFImageManager) -> Void)?
   var onDeSelction: ((_ imageManager: SFImageManager) -> Void)?
   var onFinish: ((_ imageManagers: [SFImageManager]) -> Void)?
@@ -38,61 +22,22 @@ public final class SFImagePicker: UIViewController, Alertable {
     mainView.addButton.target = self
     mainView.cancelButton.action = #selector(cancelButtomDidTap)
     mainView.cancelButton.target = self
-    PHPhotoLibrary.shared().register(self)
+    photosManager.selectedAction = { [weak self] items in
+      guard let self = self else { return }
+      self.mainView.setSelectionCount(items.count)
+      self.mainView.addButton.isEnabled = items.count >= self.settings.selection.min
+    }
+    photosManager.photosLibrary.register(self)
   }
   
   public override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    permissionCheck()
-  }
-  
-  private func permissionCheck() {
-    let photoAuthorizationStatus = PHPhotoLibrary.authorizationStatus(for: .readWrite)
-    switch photoAuthorizationStatus {
-    case .notDetermined:
-      PHPhotoLibrary.requestAuthorization(
-        for: .readWrite
-      ) { [weak self] status in
-        switch status {
-        case .authorized:
-          self?.requestCollection()
-          DispatchQueue.main.async {
-            self?.mainView.photoCollectionView.reloadData()
-          }
-        default:
-          break
-        }
-      }
-    case .authorized, .limited:
-      requestCollection()
-      mainView.photoCollectionView.reloadData()
-    default:
-      return
-    }
-  }
-  
-  private func requestCollection() {
-    let cameraRoll: PHFetchResult<PHAssetCollection> = PHAssetCollection
-      .fetchAssetCollections(
-        with: .smartAlbum,
-        subtype: .smartAlbumUserLibrary,
-        options: nil
-      )
-    
-    guard let cameraRollCollection = cameraRoll.firstObject else { return }
-    let fetchOptions = PHFetchOptions()
-    fetchOptions.sortDescriptors = [
-      NSSortDescriptor(
-        key: "creationDate",
-        ascending: false
-      )
-    ]
-    fetchResult = PHAsset.fetchAssets(in: cameraRollCollection, options: fetchOptions)
+    photosManager.permissionCheck(mainView.photoCollectionView)
   }
   
   @objc
   private func addButtomDidTap() {
-    let assetManagers = selectedItems.compactMap { $0.imageManager }
+    let assetManagers = photosManager.selectedImageManager
     delegate?.picker(picker: self, results: assetManagers)
     onFinish?(assetManagers)
     dismiss(animated: true)
@@ -101,7 +46,7 @@ public final class SFImagePicker: UIViewController, Alertable {
   @objc
   private func cancelButtomDidTap() {
     delegate?.picker(picker: self, results: [])
-    onCancel?(selectedItems.compactMap { $0.imageManager })
+    onCancel?(photosManager.selectedImageManager)
     dismiss(animated: true)
   }
 }
@@ -124,34 +69,20 @@ extension SFImagePicker {
 
 extension SFImagePicker {
   private func deSelect(indexPath: IndexPath) {
-    if let positionIndex = selectedItems.firstIndex(where: {
-      $0.assetIdentifier == fetchResult?.object(at: indexPath.row).localIdentifier
-    }) {
-      let removeItem = selectedItems.remove(at: positionIndex)
+    if let removeItem = photosManager.deSelect(indexPath: indexPath) {
       guard let removeItemImageManager = removeItem.imageManager else { return }
       onDeSelction?(removeItemImageManager)
-      let selectedIndexPaths = selectedItems.map {
-        IndexPath(row: $0.index, section: 0)
-      }
-      mainView.photoCollectionView.reloadItems(at: selectedIndexPaths + [indexPath])
+      mainView.photoCollectionView.reloadItems(at: photosManager.selectedItemIndexPaths + [indexPath])
     }
   }
   
   private func select(indexPath: IndexPath) {
-    guard let asset = fetchResult?.object(at: indexPath.row) else { return }
-    let newSelectionItem = SFAssetItem(
-      index: indexPath.row,
-      assetIdentifier: asset.localIdentifier,
-      imageManager: .init(
-        asset: asset,
-        manager: imageManager,
-        fatchOptions: settings.fetchOptions.options
-      )
-    )
-    guard let newItemImageManager = newSelectionItem.imageManager else { return }
+    guard let newSelecedItem = photosManager.select(indexPath: indexPath) else { return }
+    guard let newItemImageManager = newSelecedItem.imageManager else { return }
+    
     if let selectionLimit = settings.selection.max {
-      if selectionLimit > selectedItems.count {
-        selectedItems.append(newSelectionItem)
+      if selectionLimit > photosManager.selectedItemCount {
+        photosManager.itemAppend(newSelecedItem)
         onSelection?(newItemImageManager)
       } else {
         let message = "이미지는 최대 \(selectionLimit)장까지 첨부할 수 있습니다."
@@ -159,7 +90,7 @@ extension SFImagePicker {
         present(alert, animated: true)
       }
     } else {
-      selectedItems.append(newSelectionItem)
+      photosManager.itemAppend(newSelecedItem)
       onSelection?(newItemImageManager)
     }
     mainView.photoCollectionView.reloadItems(at: [indexPath])
@@ -177,7 +108,7 @@ extension SFImagePicker: UICollectionViewDataSource {
     _ collectionView: UICollectionView,
     numberOfItemsInSection section: Int
   ) -> Int {
-    return fetchResult?.count ?? 0
+    return photosManager.assetCount ?? 0
   }
   
   public func collectionView(
@@ -189,26 +120,21 @@ extension SFImagePicker: UICollectionViewDataSource {
       for: indexPath
     ) as? SFImageCell ?? SFImageCell()
     
-    guard let asset = fetchResult?.object(at: indexPath.row) else { return cell }
+    guard let asset = photosManager.getAsset(at: indexPath.row) else { return cell }
     cell.representedAssetIdentifier = asset.localIdentifier
     cell.selectionIndicator.circleColor = settings.ui.selectedIndicatorColor
     cell.selectionIndicator.textColor = settings.ui.selectedIndicatorTextColor
+    let item = self.photosManager.getItem(id: asset.localIdentifier)
     cell.indicatorButtonDidTap = { [weak self] in
       guard let self = self else { return }
-      
-      let cellIsInTheSelectionPool = self.selectedItems.isInselectionPool(
-        id: asset.localIdentifier,
-        indexPath: indexPath
-      )
-
-      if cellIsInTheSelectionPool {
+      if item != nil {
         self.deSelect(indexPath: indexPath)
       } else {
         self.select(indexPath: indexPath)
       }
     }
     
-    imageManager.requestImage(
+    photosManager.imageManager.requestImage(
       for: asset,
       targetSize: cell.bounds.size,
       contentMode: .aspectFill,
@@ -219,9 +145,7 @@ extension SFImagePicker: UICollectionViewDataSource {
       }
     }
     
-    if let index = selectedItems.firstIndex(
-      where: { $0.assetIdentifier == asset.localIdentifier }
-    ) {
+    if let index = photosManager.getItemIndex(id: asset.localIdentifier) {
       cell.selectionIndicator.setNumber(index + 1)
     } else {
       cell.selectionIndicator.setNumber(nil)
@@ -239,7 +163,8 @@ extension SFImagePicker: UICollectionViewDelegate {
     didSelectItemAt indexPath: IndexPath
   ) {
     // 이미지 디테일
-    let vc = SFDetailImageViewController(fetchResult: fetchResult!, settings: settings, selectedItems: selectedItems, indexPath: indexPath)
+    guard let imageCount = photosManager.assetCount else { return }
+    let vc = SFDetailImageViewController(photosManager: photosManager, imageCount: imageCount, indexPath: indexPath)
     vc.delegate = self
     vc.modalPresentationStyle = .fullScreen
     self.present(vc, animated: true)
@@ -250,16 +175,12 @@ extension SFImagePicker: UICollectionViewDelegate {
 
 extension SFImagePicker: DetailViewDelegate {
   func detailView(didSelectItemAt indexPath: IndexPath) {
-    guard let asset = fetchResult?.object(at: indexPath.row) else { return }
-    let cellIsInTheSelectionPool = self.selectedItems.isInselectionPool(
-      id: asset.localIdentifier,
-      indexPath: indexPath
-    )
-
-    if cellIsInTheSelectionPool {
-      self.deSelect(indexPath: indexPath)
+    guard let asset = photosManager.getAsset(at: indexPath.row) else { return }
+    let item = photosManager.getItem(id: asset.localIdentifier)
+    if item != nil {
+      deSelect(indexPath: indexPath)
     } else {
-      self.select(indexPath: indexPath)
+      select(indexPath: indexPath)
     }
   }
 }
@@ -268,7 +189,7 @@ extension SFImagePicker: DetailViewDelegate {
 
 extension SFImagePicker: PHPhotoLibraryChangeObserver {
   public func photoLibraryDidChange(_ changeInstance: PHChange) {
-    self.requestCollection()
+    photosManager.requestCollection()
     DispatchQueue.main.async {
       self.mainView.photoCollectionView.reloadData()
     }

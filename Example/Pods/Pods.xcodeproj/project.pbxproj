@@ -29,7 +29,8 @@
 		9B68F074291B9A2A00105A18 /* SFImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6ECCA82918D011007F92D2 /* SFImageCell.swift */; };
 		9B68F075291B9A2C00105A18 /* SFImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6ECCAA2918D311007F92D2 /* SFImagePickerView.swift */; };
 		9B68F078291BA50300105A18 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B68F076291BA4C400105A18 /* UIViewController+Extension.swift */; };
-		9BE2F4742A6A83C000D8E018 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE2F4732A6A83C000D8E018 /* Array+Extension.swift */; };
+		9B882F2F2A889218002ACEE4 /* SFPhotosManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B882F2E2A889218002ACEE4 /* SFPhotosManager.swift */; };
+		9B882F332A88B31B002ACEE4 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B882F322A88B31B002ACEE4 /* UIView+Extension.swift */; };
 		9BE2F4772A6B86DD00D8E018 /* Alertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE2F4762A6B86DD00D8E018 /* Alertable.swift */; };
 		9BE49E7A2A6E584400A46E8D /* DetailViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE49E792A6E584400A46E8D /* DetailViewDelegate.swift */; };
 		9DC2AE13FB690EDAEA79B76740E1B4DE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAB6F611E86A4758835A715E4B4184F6 /* Foundation.framework */; };
@@ -92,7 +93,8 @@
 		9B6ECCA82918D011007F92D2 /* SFImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFImageCell.swift; sourceTree = "<group>"; };
 		9B6ECCAA2918D311007F92D2 /* SFImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFImagePickerView.swift; sourceTree = "<group>"; };
 		9B6ECCAD2918DAB9007F92D2 /* UICollectionViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+Extension.swift"; sourceTree = "<group>"; };
-		9BE2F4732A6A83C000D8E018 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
+		9B882F2E2A889218002ACEE4 /* SFPhotosManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFPhotosManager.swift; sourceTree = "<group>"; };
+		9B882F322A88B31B002ACEE4 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		9BE2F4762A6B86DD00D8E018 /* Alertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alertable.swift; sourceTree = "<group>"; };
 		9BE49E792A6E584400A46E8D /* DetailViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewDelegate.swift; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -257,6 +259,7 @@
 				9B2F209E29179DCE0057ACFC /* SFPickerSelection.swift */,
 				9B2F20A029179E660057ACFC /* SFPickerFetchOptions.swift */,
 				9B2F20A42917A0C70057ACFC /* SFPickerSettings.swift */,
+				9B882F2E2A889218002ACEE4 /* SFPhotosManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -287,7 +290,7 @@
 			children = (
 				9B6ECCAD2918DAB9007F92D2 /* UICollectionViewCell+Extension.swift */,
 				9B68F076291BA4C400105A18 /* UIViewController+Extension.swift */,
-				9BE2F4732A6A83C000D8E018 /* Array+Extension.swift */,
+				9B882F322A88B31B002ACEE4 /* UIView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -502,7 +505,6 @@
 				9B2F2095291767390057ACFC /* SFImagePicker.swift in Sources */,
 				9B68F072291B995000105A18 /* SFImagePickerDelegate.swift in Sources */,
 				9B2F20A129179E660057ACFC /* SFPickerFetchOptions.swift in Sources */,
-				9BE2F4742A6A83C000D8E018 /* Array+Extension.swift in Sources */,
 				9B518D262A6006C700941FB0 /* SFDetailImageViewController.swift in Sources */,
 				9B68F078291BA50300105A18 /* UIViewController+Extension.swift in Sources */,
 				9B68F074291B9A2A00105A18 /* SFImageCell.swift in Sources */,
@@ -512,8 +514,10 @@
 				9B598CAC2A5D380F009D5A79 /* SFImageDetailView.swift in Sources */,
 				9BE2F4772A6B86DD00D8E018 /* Alertable.swift in Sources */,
 				FACD3CDEBF41D43D2055E16D5675EB37 /* SFImagePicker.swift in Sources */,
+				9B882F2F2A889218002ACEE4 /* SFPhotosManager.swift in Sources */,
 				9B2F2099291767A00057ACFC /* SFImageManager.swift in Sources */,
 				9B2F209D29179D770057ACFC /* SFPickerUI.swift in Sources */,
+				9B882F332A88B31B002ACEE4 /* UIView+Extension.swift in Sources */,
 				9B68F073291B9A2600105A18 /* SFSelectionIndicator.swift in Sources */,
 				9BE49E7A2A6E584400A46E8D /* DetailViewDelegate.swift in Sources */,
 				9B68F075291B9A2C00105A18 /* SFImagePickerView.swift in Sources */,

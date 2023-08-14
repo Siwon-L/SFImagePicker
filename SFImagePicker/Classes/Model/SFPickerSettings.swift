@@ -8,6 +8,8 @@
 import Foundation
 
 public final class SFPickerSettings {
+  static let shared = SFPickerSettings()
+  
   public let fetchOptions: SFPickerFetchOptions
   public var ui: SFPickerUI
   public var selection: SFPickerSelection
